@@ -13,6 +13,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  h1 {
+    font-size: 3rem;
+  }
+  
+  label {
+    font-size: 2rem;
+  }
+  
 
   /* Next block defines what root 1rem is */
 
