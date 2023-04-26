@@ -22,6 +22,14 @@ export default createGlobalStyle`
     font-size: 2rem;
   }
   
+  p {
+    font-size: 2rem;
+  }
+  
+  // Hide LastPass icon in inputs
+  div[data-lastpass-icon-root] { 
+    display: none 
+  }
 
   /* Next block defines what root 1rem is */
 

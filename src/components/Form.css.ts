@@ -25,6 +25,11 @@ export const StyledInput = styled.input`
   padding: 1rem;
 `
 
+export const CheckboxInput = styled.input`
+  width: 2rem;
+  height: 2rem;
+`
+
 export const AcceptRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -39,6 +44,7 @@ export const Button = styled.button`
   padding: 1rem;
   width: 100%;
   font-size: 2rem;
+  cursor: pointer;
 `
 
 export const CheckboxContainer = styled.div`
@@ -51,6 +57,7 @@ export const ErrorSpan = styled.span`
   color: red;
   height: 1.8rem;
   margin-top: 0.2rem;
+  font-size: 1.6rem;
 `
 
 export const Blank = styled.div`

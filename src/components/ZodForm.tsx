@@ -12,6 +12,7 @@ import {
   ErrorSpan,
   Blank,
   Header,
+  CheckboxInput,
 } from './Form.css'
 
 const zodFormSchema = z
@@ -123,7 +124,7 @@ const ZodForm = () => {
           <Row>
             <AcceptRow>
               <CheckboxContainer>
-                <input
+                <CheckboxInput
                   id="terms_"
                   aria-describedby="terms"
                   type="checkbox"

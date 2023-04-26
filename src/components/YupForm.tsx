@@ -12,6 +12,7 @@ import {
   ErrorSpan,
   Blank,
   Header,
+  CheckboxInput,
 } from './Form.css'
 
 const yupFormSchema = yup.object().shape({
@@ -106,12 +107,16 @@ const YupForm = () => {
             id="confirm-password"
             {...register('confirmPassword')}
           />
-          {errors.confirmPassword ? <ErrorSpan>{errors.confirmPassword.message}</ErrorSpan> : <Blank />}
+          {errors.confirmPassword ? (
+            <ErrorSpan>{errors.confirmPassword.message}</ErrorSpan>
+          ) : (
+            <Blank />
+          )}
         </Row>
         <Row>
           <AcceptRow>
             <CheckboxContainer>
-              <input
+              <CheckboxInput
                 id="terms"
                 aria-describedby="terms"
                 type="checkbox"
@@ -125,7 +130,11 @@ const YupForm = () => {
               </label>
             </div>
           </AcceptRow>
-          {errors.terms ? <ErrorSpan>{errors.terms.message}</ErrorSpan> : <Blank />}
+          {errors.terms ? (
+            <ErrorSpan>{errors.terms.message}</ErrorSpan>
+          ) : (
+            <Blank />
+          )}
         </Row>
 
         <Button type="submit" disabled={isSubmitting}>

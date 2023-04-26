@@ -7,7 +7,7 @@ export const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* height: 100vh; */
 `
 
 export const FormsContainer = styled.div`
