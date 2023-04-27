@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { z } from 'zod'
+import { ZodIssue, z } from 'zod'
+import { ValidationError, fromZodError } from 'zod-validation-error'
 
 import {
   ResultsCard,
@@ -7,71 +8,84 @@ import {
   ResultsContainer,
   Image,
   DataContainer,
+  ErrorMessage,
+  PlaceholderContainer,
 } from './Request.css'
-import xwing from '../assets/x-wing.png'
+import errorImage from '../assets/cat-error.png'
+import resetImage from '../assets/such-empty.png'
 
-const PersonSchema = z.object({
-  name: z.number(),
-  mass: z.union([z.number(), z.string()]),
-})
+const CatSchema = z.array(
+  z.object({
+    url: z.string().url(),
+    // score: z.number()
+  }),
+)
 
-const ResultsSchema = z.object({
-  results: z.array(PersonSchema),
-})
-
-type PersonType = z.infer<typeof PersonSchema>
+type PersonType = z.infer<typeof CatSchema>
 
 const Request = () => {
-  const [isShowImage, setIsShowImage] = useState(true)
   const [parsedData, setParsedData] = useState<PersonType[]>()
+  const [isSuccess, setIsSuccess] = useState<boolean>()
+  const [catUrl, setCatUrl] = useState<string>()
+  const [errors, setErrors] = useState<string>()
 
-  const fetchPeople = async () => {
+  const apiKey =
+    'live_SDlCPG7Qb9dLy1ZgZo2jNek2fdwN2ZJ1uOQvwSEygdEsT7xTOYUOjJMnIczWO71E'
+
+  const fetchCat = async () => {
     const data = await fetch(
-      // 'https://www.totaltypescript.com/swapi/people.json',
-      'https://swapi.dev/api/people/1/',
+      `https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=${apiKey}`,
     ).then((res) => res.json())
-    
-    console.log('data', data)
 
-    const parsed = ResultsSchema.parse(data)
+    console.log('raw data', data)
 
-    console.log('data', data)
-
-    setIsShowImage(false)
-    setParsedData(parsed.results)
+    const parsed = CatSchema.safeParse(data)
+    console.log('parsed data', parsed)
+    // Handle Success
+    if (parsed.success) {
+      setIsSuccess(true)
+      setErrors(undefined)
+      setCatUrl(data[0].url)
+    // Handle Error
+    } else {
+      setIsSuccess(false)
+      const errorsMessage = fromZodError(parsed.error)
+      setParsedData([])
+      setErrors(String(errorsMessage))
+    }
   }
 
   const handleClear = () => {
-    console.log('pressed')
-    setIsShowImage(true)
     setParsedData([])
+    setErrors(undefined)
+    setIsSuccess(undefined)
   }
-
+  
   return (
-    <div>
-      <h1>Validate and Filter an API Call</h1>
+    // <div>
+    //   <h1>Validate and Filter an API Call</h1>
       <ResultsCard>
-        <RequestButton onClick={fetchPeople}>Get Data</RequestButton>
+        <RequestButton onClick={fetchCat}>Get Cat</RequestButton>
         <ResultsContainer>
-          {/* {parsedData?.length ? ( */}
-          <DataContainer isShowImage={isShowImage}>
-            {parsedData?.map((person, index) => {
-              return (
-                <div key={index}>
-                  <p>{JSON.stringify(person, null, '\t')}</p>
-                </div>
-              )
-            })}
+          <DataContainer>
+            {isSuccess ? (
+              <Image src={catUrl} alt="cat" />
+            ) : (
+              <PlaceholderContainer>
+                {errors ? (
+                  <Image src={errorImage} alt="error" />
+                ) : (
+                  <Image src={resetImage} alt="reset" />
+                )}
+              </PlaceholderContainer>
+            )}
           </DataContainer>
-          {/* ) : ( */}
-          <Image isShowImage={isShowImage} src={xwing} alt="x-wing fighter" />
-          {/* )} */}
         </ResultsContainer>
         <RequestButton isResetButton onClick={handleClear}>
-          Clear
+          Reset
         </RequestButton>
       </ResultsCard>
-    </div>
+    // </div>
   )
 }
 

@@ -1,5 +1,16 @@
 import styled from 'styled-components'
 
+export const FormsContainer = styled.div`
+  background: #93BFCF;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
+
 export const Card = styled.div`
   background: #EEE9Da;
   width: 40rem;
