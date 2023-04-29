@@ -1,6 +1,12 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 import { Colors } from '../styles/colors'
+import { ReactComponent as Icon } from "../assets/checkmark.svg";
+
+const svg = css`
+  position: absolute;
+  fill: none;
+`;
 
 export const HomeContainer = styled.div`
   width: 100%;
@@ -11,13 +17,6 @@ export const HomeContainer = styled.div`
 
 export const FormsContainer = styled.div`
   background: #FFFFFF;
-  max-width: 105rem;
-  min-height: 80rem;
-  padding: 3rem;
-  margin: 5rem;
-  border-radius: 5px;
-  border: 2px solid ${Colors.gray};
-  box-shadow: 2px 3px 5px ${Colors.gray};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,6 +39,7 @@ export const Row = styled.div`
   width: 100%;
   margin: 0.5rem;
 `
+
 export const StyledInput = styled.input`
   border-radius: 5px;
   border: 0.5px solid ${Colors.gray};
@@ -59,6 +59,13 @@ export const CheckboxInput = styled.input`
   border: 1px solid ${Colors.gray};
   border-radius: 3px;
 `
+
+export const Checkmark = styled(Icon)`
+  ${svg}
+  width: 1.6rem;
+  height: 1.6rem;
+  pointer-events: none;
+`;
 
 export const AcceptRow = styled.div`
   display: flex;

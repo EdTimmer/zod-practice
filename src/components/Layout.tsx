@@ -12,8 +12,6 @@ import {
 
 const Layout = () => {
   const location = useLocation()
-  console.log('location.pathname', location.pathname)
-  // const link = location.pathname === '/' ? '/forms' : '/'
   const pathname = location.pathname
   return (
     <LayoutContainer>

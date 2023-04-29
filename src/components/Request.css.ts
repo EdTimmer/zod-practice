@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
 
 import { Colors } from '../styles/colors'
 
@@ -11,14 +11,9 @@ export const RequestContainer = styled.div`
 `
 
 export const ResultsCard = styled.div`
-  /* background: #EEE9Da; */
-  background: #FFFFFF;
-  /* background: ${ lighten(0.2, `${Colors.gray}`)}; */
+  background: ${Colors.white};
   width: 100rem;
-  min-height: 80rem;
-  height: 70%;
   padding: 3rem;
-  margin: 5rem;
   border-radius: 5px;
   border: 2px solid ${Colors.gray};
   box-shadow: 2px 3px 5px ${Colors.gray};
@@ -114,7 +109,6 @@ export const BottomRightSection = styled.div`
   place-items: center;
 `
 
-
 export const Image = styled.img`
   max-width: 100%;
   max-height: 60rem;
@@ -124,7 +118,6 @@ export const Image = styled.img`
 
 export const ErrorContainer = styled.div`
   padding: 1rem 1rem 0 1rem;
-  /* margin: 1rem; */
   border: 1px solid ${Colors.gray};
   border-radius: 5px;
 `

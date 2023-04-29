@@ -13,7 +13,9 @@ import {
   Blank,
   Header,
   CheckboxInput,
+  Checkmark,
 } from './Forms.css'
+import { useState } from 'react'
 
 const yupFormSchema = yup.object().shape({
   username: yup
@@ -51,12 +53,18 @@ const YupForm = () => {
   } = useForm<YupFormType>({
     resolver: yupResolver(yupFormSchema),
   })
+  
+  const [ isChecked, setIsChecked ] = useState(false)
 
   const onSubmit: SubmitHandler<YupFormType> = (data) => {
     console.log(data)
     reset()
   }
-
+  
+  const handleCheckboxClick = () => {
+    setIsChecked(!isChecked)
+  }
+  
   return (
     <Card>
       <Header>
@@ -117,18 +125,26 @@ const YupForm = () => {
           <AcceptRow>
             <CheckboxContainer>
               <CheckboxInput
+                onClick={handleCheckboxClick}
                 id="terms"
                 aria-describedby="terms"
                 type="checkbox"
                 {...register('terms')}
               />
+              {
+                isChecked && <Checkmark />
+              }
             </CheckboxContainer>
-            <div>
               <label htmlFor="terms">
                 I accept the{' '}
-                <a href="https://www.google.com/">Terms and Conditions</a>
+                <a
+                  href="https://www.google.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Terms and Conditions
+                </a>
               </label>
-            </div>
           </AcceptRow>
           {errors.terms ? (
             <ErrorSpan>{errors.terms.message}</ErrorSpan>
