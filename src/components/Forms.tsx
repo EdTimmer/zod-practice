@@ -1,13 +1,15 @@
-import { FormsContainer } from "./Forms.css"
+import { FormsContainer, HomeContainer } from "./Forms.css"
 import YupForm from "./YupForm"
 import ZodForm from "./ZodForm"
 
 const Forms = () => {
   return (
-    <FormsContainer>
-      <YupForm />
-      <ZodForm />
-    </FormsContainer>
+    <HomeContainer>
+      <FormsContainer>
+        <YupForm />
+        <ZodForm />
+      </FormsContainer>
+    </HomeContainer>
   )
 }
 

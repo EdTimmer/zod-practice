@@ -3,28 +3,40 @@ import { ZodIssue, z } from 'zod'
 import { ValidationError, fromZodError } from 'zod-validation-error'
 
 import {
+  RequestContainer,
   ResultsCard,
-  RequestButton,
-  ResultsContainer,
+  TopLeftSection,
+  TopRightSection,
+  BottomLeftSection,
+  BottomRightSection,
+  Button,
   Image,
-  DataContainer,
   ErrorMessage,
   PlaceholderContainer,
+  InfoCard,
+  LabelHeader,
 } from './Request.css'
 import errorImage from '../assets/cat-error.png'
 import resetImage from '../assets/such-empty.png'
 
 const CatSchema = z.array(
   z.object({
+    // score: z.number(),
     url: z.string().url(),
-    // score: z.number()
+    breeds: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        temperament: z.string(),
+      }),
+    ),
   }),
 )
 
-type PersonType = z.infer<typeof CatSchema>
+type CatType = z.infer<typeof CatSchema>
 
 const Request = () => {
-  const [parsedData, setParsedData] = useState<PersonType[]>()
+  const [parsedData, setParsedData] = useState<CatType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   const [catUrl, setCatUrl] = useState<string>()
   const [errors, setErrors] = useState<string>()
@@ -46,7 +58,8 @@ const Request = () => {
       setIsSuccess(true)
       setErrors(undefined)
       setCatUrl(data[0].url)
-    // Handle Error
+      setParsedData(parsed.data)
+      // Handle Error
     } else {
       setIsSuccess(false)
       const errorsMessage = fromZodError(parsed.error)
@@ -60,32 +73,61 @@ const Request = () => {
     setErrors(undefined)
     setIsSuccess(undefined)
   }
-  
+
   return (
-    // <div>
-    //   <h1>Validate and Filter an API Call</h1>
+    <RequestContainer>
       <ResultsCard>
-        <RequestButton onClick={fetchCat}>Get Cat</RequestButton>
-        <ResultsContainer>
-          <DataContainer>
-            {isSuccess ? (
+        <TopLeftSection>
+          {isSuccess && parsedData ? (
+            <>
+              <InfoCard>
+                <LabelHeader>Breed</LabelHeader>
+                <p>{parsedData[0].breeds[0].name}</p>
+              </InfoCard>
+              <InfoCard>
+                <LabelHeader>Temperament</LabelHeader>
+                <p>{parsedData[0].breeds[0].temperament}</p>
+              </InfoCard>
+              <InfoCard>
+                <LabelHeader>Description</LabelHeader>
+                <p>{parsedData[0].breeds[0].description}</p>
+              </InfoCard>
+            </>
+          ) : (
+            <PlaceholderContainer>
+              {errors ? (
+                <ErrorMessage>{errors}</ErrorMessage>
+              ) : (
+                <p>Go get cat</p>
+              )}
+            </PlaceholderContainer>
+          )}
+        </TopLeftSection>
+        <TopRightSection>
+          {isSuccess && parsedData ? (
+            <>
               <Image src={catUrl} alt="cat" />
-            ) : (
-              <PlaceholderContainer>
-                {errors ? (
-                  <Image src={errorImage} alt="error" />
-                ) : (
-                  <Image src={resetImage} alt="reset" />
-                )}
-              </PlaceholderContainer>
-            )}
-          </DataContainer>
-        </ResultsContainer>
-        <RequestButton isResetButton onClick={handleClear}>
-          Reset
-        </RequestButton>
+            </>
+          ) : (
+            <PlaceholderContainer>
+              {errors ? (
+                <Image src={errorImage} alt="error" />
+              ) : (
+                <Image src={resetImage} alt="reset" />
+              )}
+            </PlaceholderContainer>
+          )}
+        </TopRightSection>
+        <BottomLeftSection>
+          <Button onClick={fetchCat}>Get Cat</Button>
+        </BottomLeftSection>
+        <BottomRightSection>
+          <Button isResetButton onClick={handleClear}>
+            Reset
+          </Button>
+        </BottomRightSection>
       </ResultsCard>
-    // </div>
+    </RequestContainer>
   )
 }
 

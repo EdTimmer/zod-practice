@@ -1,10 +1,23 @@
 import styled from 'styled-components'
+import { Colors } from '../styles/colors'
 
-export const FormsContainer = styled.div`
-  background: #93BFCF;
+export const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
+  padding: 5rem;
+  display: grid;
+  place-items: center;
+`
+
+export const FormsContainer = styled.div`
+  background: #FFFFFF;
+  width: 100%;
+  height: 70%;
+  padding: 3rem;
+  margin: 5rem;
   border-radius: 5px;
+  border: 0.5px solid ${Colors.gray};
+  box-shadow: 2px 3px 5px ${Colors.gray};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,13 +25,14 @@ export const FormsContainer = styled.div`
 `
 
 export const Card = styled.div`
-  background: #EEE9Da;
+  /* background: #EEE9Da; */
+  background: #FFFFFF;
   width: 40rem;
   padding: 3rem;
   margin: 5rem;
   border-radius: 5px;
-  border: 0.5px solid black;
-  box-shadow: 2px 3px 5px black;
+  border: 0.5px solid darkgray;
+  box-shadow: 2px 3px 5px darkgray;
 `
 
 export const Row = styled.div`
