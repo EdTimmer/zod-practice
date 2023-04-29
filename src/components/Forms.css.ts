@@ -1,22 +1,22 @@
 import styled from 'styled-components'
+import { darken } from 'polished'
 import { Colors } from '../styles/colors'
 
 export const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 5rem;
   display: grid;
   place-items: center;
 `
 
 export const FormsContainer = styled.div`
   background: #FFFFFF;
-  width: 100%;
-  height: 70%;
+  max-width: 105rem;
+  min-height: 80rem;
   padding: 3rem;
   margin: 5rem;
   border-radius: 5px;
-  border: 0.5px solid ${Colors.gray};
+  border: 2px solid ${Colors.gray};
   box-shadow: 2px 3px 5px ${Colors.gray};
   display: flex;
   flex-direction: row;
@@ -25,14 +25,13 @@ export const FormsContainer = styled.div`
 `
 
 export const Card = styled.div`
-  /* background: #EEE9Da; */
   background: #FFFFFF;
-  width: 40rem;
+  min-width: 40rem;
   padding: 3rem;
   margin: 5rem;
   border-radius: 5px;
-  border: 0.5px solid darkgray;
-  box-shadow: 2px 3px 5px darkgray;
+  border: 2px solid ${Colors.gray};
+  box-shadow: 2px 3px 5px ${Colors.gray};
 `
 
 export const Row = styled.div`
@@ -43,7 +42,7 @@ export const Row = styled.div`
 `
 export const StyledInput = styled.input`
   border-radius: 5px;
-  border: 0.5px solid black;
+  border: 0.5px solid ${Colors.gray};
   background: #F9FBFC;
   height: 4rem;
   margin-top: 1rem;
@@ -53,6 +52,12 @@ export const StyledInput = styled.input`
 export const CheckboxInput = styled.input`
   width: 2rem;
   height: 2rem;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  border: 1px solid ${Colors.gray};
+  border-radius: 3px;
 `
 
 export const AcceptRow = styled.div`
@@ -64,12 +69,23 @@ export const AcceptRow = styled.div`
 export const Button = styled.button`
   border-radius: 5px;
   border: none;
-  background: #6096B4;
+  background: ${Colors.green};
   color: white;
   padding: 1rem;
   width: 100%;
   font-size: 2rem;
   cursor: pointer;
+  box-shadow: 2px 3px 5px ${Colors.gray};
+  transition: all .2s;
+  
+  &:hover {
+    background: ${darken(0.07, `${Colors.green}`)};
+  }
+  &:active {
+    color: ${Colors.black};
+    transform: translateY(.2rem);
+    box-shadow: none;
+  }
 `
 
 export const CheckboxContainer = styled.div`

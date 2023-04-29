@@ -1,16 +1,20 @@
 import styled from 'styled-components'
+import { lighten } from 'polished'
 import { Link } from "react-router-dom";
+
 import { Colors } from '../styles/colors'
 
 export const LayoutContainer = styled.div`
   height: 100%;
   width: 100vw;
 `
+
 export const Header = styled.div`
   height: 10rem;
   width: 100%;
   background: ${Colors.orange};
-  padding: 2rem;
+  box-shadow: 0 5px 5px ${Colors.gray};
+  padding: 2rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -30,26 +34,42 @@ export const OutletContainer = styled.div`
 
 export const Logo = styled.h1`
   color: ${Colors.white};
-  margin-left: 2rem;
+  margin-left: 5rem;
 `
 
-export const Nav = styled.div`
+export const NavContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  margin-right: 5rem;
 `
-export const NavLink = styled(Link)<{ isCurrentPage: boolean }>`
-  color: ${Colors.white};
-  color: ${({ isCurrentPage }) => isCurrentPage ? Colors.gray : Colors.white};
-  font-size: 2rem;
-  text-decoration: none;
-  cursor: ${({ isCurrentPage }) => isCurrentPage ? 'default' : 'pointer'};
-  
+
+export const LinkContainer = styled.div<{ isCurrentPage: boolean }>`
+  border: none;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid ${ Colors.orange };
+  border-right: 1px solid ${ Colors.orange }; 
+  border-left: 1px solid ${ Colors.orange }; 
+  border-bottom: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.white}` : `1px solid ${Colors.orange}`};
+  border-radius: 3px;
+  transition: all .2s;
+
   &:hover {
-    /* color: ${Colors.beige}; */
-    color: ${({ isCurrentPage }) => isCurrentPage ? Colors.gray : Colors.beige};
+    border-top: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
+    border-right: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
+    border-bottom: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.white}` : `1px solid ${Colors.white}`};
+    border-left: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
   }
   &:active {
-      color: ${({ isCurrentPage }) => isCurrentPage ? Colors.gray : Colors.black};
+      transform: ${({ isCurrentPage }) => isCurrentPage ? 'none' : `translateY(.2rem)`};
+      background: ${({ isCurrentPage }) => isCurrentPage ? 'none' : `${ lighten(0.07, `${Colors.orange}`)}`}; ;
   };
+`
+
+export const NavLink = styled(Link) <{ isCurrentPage: boolean }>`
+  color: ${Colors.white};
+  font-size: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: ${({ isCurrentPage }) => isCurrentPage ? 'default' : 'pointer'};
 `

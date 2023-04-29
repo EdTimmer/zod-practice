@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { ZodIssue, z } from 'zod'
-import { ValidationError, fromZodError } from 'zod-validation-error'
+import { z } from 'zod'
+import { fromZodError } from 'zod-validation-error'
 
 import {
   RequestContainer,
@@ -9,25 +9,30 @@ import {
   TopRightSection,
   BottomLeftSection,
   BottomRightSection,
-  Button,
+  SubmitButton,
+  ResetButton,
   Image,
+  ErrorContainer,
   ErrorMessage,
   PlaceholderContainer,
   InfoCard,
-  LabelHeader,
+  InfoNumber,
+  ParagraphHeader,
+  NumberHeader,
 } from './Request.css'
 import errorImage from '../assets/cat-error.png'
-import resetImage from '../assets/such-empty.png'
+import resetImage from '../assets/doge.png'
 
 const CatSchema = z.array(
   z.object({
-    // score: z.number(),
     url: z.string().url(),
     breeds: z.array(
       z.object({
         name: z.string(),
         description: z.string(),
         temperament: z.string(),
+        affection_level: z.number(),
+        energy_level: z.number(),
       }),
     ),
   }),
@@ -39,7 +44,7 @@ const Request = () => {
   const [parsedData, setParsedData] = useState<CatType>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
   const [catUrl, setCatUrl] = useState<string>()
-  const [errors, setErrors] = useState<string>()
+  const [errors, setErrors] = useState<string[]>()
 
   const apiKey =
     'live_SDlCPG7Qb9dLy1ZgZo2jNek2fdwN2ZJ1uOQvwSEygdEsT7xTOYUOjJMnIczWO71E'
@@ -64,7 +69,7 @@ const Request = () => {
       setIsSuccess(false)
       const errorsMessage = fromZodError(parsed.error)
       setParsedData([])
-      setErrors(String(errorsMessage))
+      setErrors(String(errorsMessage).split(';'))
     }
   }
 
@@ -81,24 +86,36 @@ const Request = () => {
           {isSuccess && parsedData ? (
             <>
               <InfoCard>
-                <LabelHeader>Breed</LabelHeader>
+                <ParagraphHeader>Breed</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].name}</p>
               </InfoCard>
               <InfoCard>
-                <LabelHeader>Temperament</LabelHeader>
+                <ParagraphHeader>Temperament</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].temperament}</p>
               </InfoCard>
+              <InfoNumber>
+                <NumberHeader>Affection Level</NumberHeader>
+                <p>{parsedData[0].breeds[0].affection_level}</p>
+              </InfoNumber>
+              <InfoNumber>
+                <NumberHeader>Energy Level</NumberHeader>
+                <p>{parsedData[0].breeds[0].energy_level}</p>
+              </InfoNumber>
               <InfoCard>
-                <LabelHeader>Description</LabelHeader>
+                <ParagraphHeader>Description</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].description}</p>
               </InfoCard>
             </>
           ) : (
             <PlaceholderContainer>
               {errors ? (
-                <ErrorMessage>{errors}</ErrorMessage>
+                <ErrorContainer>
+                  {errors.map((err, index) => {
+                    return <ErrorMessage key={index}>{err}</ErrorMessage>
+                  })}
+                </ErrorContainer>
               ) : (
-                <p>Go get cat</p>
+                <p>Wow, such empty</p>
               )}
             </PlaceholderContainer>
           )}
@@ -119,12 +136,10 @@ const Request = () => {
           )}
         </TopRightSection>
         <BottomLeftSection>
-          <Button onClick={fetchCat}>Get Cat</Button>
+          <SubmitButton onClick={fetchCat}>Get Cat</SubmitButton>
         </BottomLeftSection>
         <BottomRightSection>
-          <Button isResetButton onClick={handleClear}>
-            Reset
-          </Button>
+          <ResetButton onClick={handleClear}>Reset</ResetButton>
         </BottomRightSection>
       </ResultsCard>
     </RequestContainer>

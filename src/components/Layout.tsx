@@ -1,31 +1,36 @@
-import { Outlet, Link, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import {
   LayoutContainer,
   Header,
   Footer,
   OutletContainer,
   Logo,
-  Nav,
+  NavContainer,
   NavLink,
+  LinkContainer,
 } from './Layout.css'
 
 const Layout = () => {
   const location = useLocation()
   console.log('location.pathname', location.pathname)
   // const link = location.pathname === '/' ? '/forms' : '/'
-  const pathname = location.pathname;
+  const pathname = location.pathname
   return (
     <LayoutContainer>
       <Header>
         <Logo>Zod Practice</Logo>
-        <Nav>
-          <NavLink isCurrentPage={pathname === '/'} to="/">
-            Form
-          </NavLink>
-          <NavLink isCurrentPage={pathname === '/api'} to="/api">
-            API Call
-          </NavLink>
-        </Nav>
+        <NavContainer>
+          <LinkContainer isCurrentPage={pathname === '/'}>
+            <NavLink isCurrentPage={pathname === '/'} to="/">
+              Form
+            </NavLink>
+          </LinkContainer>
+          <LinkContainer isCurrentPage={pathname === '/api'}>
+            <NavLink isCurrentPage={pathname === '/api'} to="/api">
+              API Call
+            </NavLink>
+          </LinkContainer>
+        </NavContainer>
       </Header>
       <OutletContainer>
         <Outlet />
