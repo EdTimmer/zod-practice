@@ -131,20 +131,14 @@ const YupForm = () => {
                 type="checkbox"
                 {...register('terms')}
               />
-              {
-                isChecked && <Checkmark />
-              }
+              {isChecked && <Checkmark />}
             </CheckboxContainer>
-              <label htmlFor="terms">
-                I accept the{' '}
-                <a
-                  href="https://www.google.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Terms and Conditions
-                </a>
-              </label>
+            <label htmlFor="terms">
+              I accept the{' '}
+              <a href="https://thecatapi.com/" target="_blank" rel="noreferrer">
+                Terms and Conditions
+              </a>
+            </label>
           </AcceptRow>
           {errors.terms ? (
             <ErrorSpan>{errors.terms.message}</ErrorSpan>

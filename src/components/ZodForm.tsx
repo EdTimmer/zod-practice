@@ -135,11 +135,7 @@ const ZodForm = () => {
             </CheckboxContainer>
             <label htmlFor="terms_">
               I accept the{' '}
-              <a
-                href="https://www.google.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://thecatapi.com/" target="_blank" rel="noreferrer">
                 Terms and Conditions
               </a>
             </label>

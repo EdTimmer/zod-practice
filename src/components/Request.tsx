@@ -89,10 +89,6 @@ const Request = () => {
                 <ParagraphHeader>Breed</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].name}</p>
               </InfoCard>
-              <InfoCard>
-                <ParagraphHeader>Temperament</ParagraphHeader>
-                <p>{parsedData[0].breeds[0].temperament}</p>
-              </InfoCard>
               <InfoNumber>
                 <NumberHeader>Affection Level</NumberHeader>
                 <p>{parsedData[0].breeds[0].affection_level}</p>
@@ -101,6 +97,10 @@ const Request = () => {
                 <NumberHeader>Energy Level</NumberHeader>
                 <p>{parsedData[0].breeds[0].energy_level}</p>
               </InfoNumber>
+              <InfoCard>
+                <ParagraphHeader>Temperament</ParagraphHeader>
+                <p>{parsedData[0].breeds[0].temperament}</p>
+              </InfoCard>
               <InfoCard>
                 <ParagraphHeader>Description</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].description}</p>
