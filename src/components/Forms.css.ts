@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 import { Colors } from '../styles/colors'
-import { ReactComponent as Icon } from "../assets/checkmark.svg";
+import { ReactComponent as CheckIcon } from "../assets/checkmark.svg";
 
 const svg = css`
   position: absolute;
@@ -60,7 +60,7 @@ export const CheckboxInput = styled.input`
   border-radius: 3px;
 `
 
-export const Checkmark = styled(Icon)`
+export const Checkmark = styled(CheckIcon)`
   ${svg}
   width: 1.6rem;
   height: 1.6rem;

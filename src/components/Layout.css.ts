@@ -32,9 +32,7 @@ export const Footer = styled.div`
 `
 
 export const OutletContainer = styled.div`
-  /* display: flex; */
   height: 100%;
-  /* height: Calc(100vh - 20rem); */
 `
 
 export const Logo = styled.h1`
@@ -49,32 +47,32 @@ export const NavContainer = styled.div`
   margin-right: 5rem;
 `
 
-export const LinkContainer = styled.div<{ isCurrentPage: boolean }>`
+export const LinkContainer = styled.div<{ $isCurrent: boolean }>`
   border: none;
   padding: 0.5rem 1rem;
-  border-top: 1px solid ${ Colors.orange };
-  border-right: 1px solid ${ Colors.orange }; 
-  border-left: 1px solid ${ Colors.orange }; 
-  border-bottom: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.white}` : `1px solid ${Colors.orange}`};
+  border-top: 1px solid ${Colors.orange};
+  border-right: 1px solid ${Colors.orange}; 
+  border-left: 1px solid ${Colors.orange}; 
+  border-bottom: ${({ $isCurrent }) => $isCurrent ? `1px solid ${Colors.white}` : `1px solid ${Colors.orange}`};
   border-radius: 3px;
   transition: all .2s;
 
   &:hover {
-    border-top: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
-    border-right: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
-    border-bottom: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.white}` : `1px solid ${Colors.white}`};
-    border-left: ${({ isCurrentPage }) => isCurrentPage ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
+    border-top: ${({ $isCurrent }) => $isCurrent ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
+    border-right: ${({ $isCurrent }) => $isCurrent ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
+    border-bottom: ${({ $isCurrent }) => $isCurrent ? `1px solid ${Colors.white}` : `1px solid ${Colors.white}`};
+    border-left: ${({ $isCurrent }) => $isCurrent ? `1px solid ${Colors.orange}` : `1px solid ${Colors.white}`};
   }
   &:active {
-      transform: ${({ isCurrentPage }) => isCurrentPage ? 'none' : `translateY(.2rem)`};
-      background: ${({ isCurrentPage }) => isCurrentPage ? 'none' : `${ lighten(0.07, `${Colors.orange}`)}`}; ;
+      transform: ${({ $isCurrent }) => $isCurrent ? 'none' : `translateY(.2rem)`};
+      background: ${({ $isCurrent }) => $isCurrent ? 'none' : `${lighten(0.07, `${Colors.orange}`)}`}; ;
   };
 `
 
-export const NavLink = styled(Link) <{ isCurrentPage: boolean }>`
+export const NavLink = styled(Link) <{ $isCurrent: boolean }>`
   color: ${Colors.white};
   font-size: 2rem;
   text-decoration: none;
   text-transform: uppercase;
-  cursor: ${({ isCurrentPage }) => isCurrentPage ? 'default' : 'pointer'};
+  cursor: ${({ $isCurrent }) => $isCurrent ? 'default' : 'pointer'};
 `

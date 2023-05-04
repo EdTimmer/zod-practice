@@ -71,7 +71,7 @@ const ZodForm = () => {
         <h1>Zod Form</h1>
       </Header>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Row>
           <label htmlFor="username_">Your username</label>
           <StyledInput type="text" id="username_" {...register('username')} />

@@ -18,13 +18,13 @@ const Layout = () => {
       <Header>
         <Logo>Zod Practice</Logo>
         <NavContainer>
-          <LinkContainer isCurrentPage={pathname === '/'}>
-            <NavLink isCurrentPage={pathname === '/'} to="/">
+          <LinkContainer $isCurrent={pathname === '/'}>
+            <NavLink $isCurrent={pathname === '/'} to="/">
               Form
             </NavLink>
           </LinkContainer>
-          <LinkContainer isCurrentPage={pathname === '/api'}>
-            <NavLink isCurrentPage={pathname === '/api'} to="/api">
+          <LinkContainer $isCurrent={pathname === '/api'}>
+            <NavLink $isCurrent={pathname === '/api'} to="/api">
               API Call
             </NavLink>
           </LinkContainer>

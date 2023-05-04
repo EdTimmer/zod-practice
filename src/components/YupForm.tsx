@@ -41,7 +41,7 @@ interface YupFormType {
   email: string
   password: string
   confirmPassword: string
-  terms: boolean
+  terms: true
 }
 
 const YupForm = () => {
@@ -53,25 +53,25 @@ const YupForm = () => {
   } = useForm<YupFormType>({
     resolver: yupResolver(yupFormSchema),
   })
-  
-  const [ isChecked, setIsChecked ] = useState(false)
+
+  const [isChecked, setIsChecked] = useState(false)
 
   const onSubmit: SubmitHandler<YupFormType> = (data) => {
     console.log(data)
     reset()
   }
-  
+
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked)
   }
-  
+
   return (
     <Card>
       <Header>
         <h1>Yup Form</h1>
       </Header>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Row>
           <label htmlFor="username">Your username</label>
           <StyledInput type="text" id="username" {...register('username')} />
