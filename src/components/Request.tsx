@@ -25,6 +25,7 @@ import resetImage from '../assets/doge.png'
 
 const CatSchema = z.array(
   z.object({
+    // score: z.number(),
     url: z.string().url(),
     breeds: z.array(
       z.object({
@@ -105,6 +106,7 @@ const Request = () => {
                 <ParagraphHeader>Description</ParagraphHeader>
                 <p>{parsedData[0].breeds[0].description}</p>
               </InfoCard>
+              <dialog>Test</dialog>
             </>
           ) : (
             <PlaceholderContainer>

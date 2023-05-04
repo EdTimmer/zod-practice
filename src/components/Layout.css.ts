@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 import { Colors } from '../styles/colors'
 
 export const LayoutContainer = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100vw;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 export const Header = styled.div`
@@ -28,8 +32,9 @@ export const Footer = styled.div`
 `
 
 export const OutletContainer = styled.div`
-  display: flex;
-  height: Calc(100vh - 20rem);
+  /* display: flex; */
+  height: 100%;
+  /* height: Calc(100vh - 20rem); */
 `
 
 export const Logo = styled.h1`
