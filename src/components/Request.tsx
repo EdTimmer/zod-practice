@@ -25,7 +25,6 @@ import resetImage from '../assets/doge.png'
 
 const CatSchema = z.array(
   z.object({
-    // score: z.number(),
     url: z.string().url(),
     breeds: z.array(
       z.object({
@@ -34,6 +33,7 @@ const CatSchema = z.array(
         temperament: z.string(),
         affection_level: z.number(),
         energy_level: z.number(),
+        // score: z.number(),
       }),
     ),
   }),

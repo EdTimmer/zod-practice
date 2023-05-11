@@ -8,7 +8,7 @@ const svg = css`
   fill: none;
 `;
 
-export const HomeContainer = styled.div`
+export const FormPage = styled.div`
   width: 100%;
   height: 100%;
   display: grid;

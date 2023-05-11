@@ -17,7 +17,7 @@ export const Header = styled.div`
   height: 10rem;
   width: 100%;
   background: ${Colors.orange};
-  box-shadow: 0 5px 5px ${Colors.gray};
+  box-shadow: 0 3px 3px ${Colors.gray};
   padding: 2rem 0;
   display: flex;
   flex-direction: row;

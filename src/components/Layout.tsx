@@ -20,6 +20,11 @@ const Layout = () => {
         <NavContainer>
           <LinkContainer $isCurrent={pathname === '/'}>
             <NavLink $isCurrent={pathname === '/'} to="/">
+              Home
+            </NavLink>
+          </LinkContainer>
+          <LinkContainer $isCurrent={pathname === '/form'}>
+            <NavLink $isCurrent={pathname === '/form'} to="/form">
               Form
             </NavLink>
           </LinkContainer>
