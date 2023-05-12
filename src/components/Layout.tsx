@@ -10,6 +10,7 @@ import {
   LinkContainer,
 } from './Layout.css'
 
+
 const Layout = () => {
   const location = useLocation()
   const pathname = location.pathname

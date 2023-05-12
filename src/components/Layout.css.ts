@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { lighten } from 'polished'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 import { Colors } from '../styles/colors'
 
@@ -28,7 +28,8 @@ export const Header = styled.div`
 export const Footer = styled.div`
   height: 10rem;
   width: 100%;
-  background: ${Colors.gray};
+  background: ${Colors.blue};
+  /* background: ${Colors.gray}; */
 `
 
 export const OutletContainer = styled.div`
