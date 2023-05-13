@@ -26,12 +26,59 @@ const moveLeftAnimation = keyframes`
   }
 `;
 
+const shakeAnimation = keyframes`
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(-5deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(5deg);
+  }
+  
+  20% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  
+  /* 25% {
+    transform: rotate(-5deg);
+  } */
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+`;
+
+const fadeInMoveLeft = keyframes`
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+`;
+
+
 export const AnimatedDiv = styled.div<{ shouldAnimate: boolean }>`
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: row;
-  animation: ${({ shouldAnimate: animate }) => animate ? css`${moveLeftAnimation} 1s linear forwards` : 'none'};
+  animation: ${({ shouldAnimate: animate }) => animate ? css`${moveLeftAnimation} .5s linear forwards` : 'none'};
 `;
 
 export const HomeContainer = styled.div`
@@ -91,11 +138,27 @@ export const TitleFlickerLetter = styled.h1`
   animation: ${flicker} 3s infinite;
 `
 
+export const TitleShakingLetter = styled.h1`
+  font-size: 16rem;
+  font-weight: 900;
+  color: ${Colors.red};
+  letter-spacing: 0;
+  animation: ${shakeAnimation} 3s infinite;
+`
+
 export const TitleLetter = styled.h1`
   font-size: 16rem;
   font-weight: 900;
   color: ${Colors.red};
   letter-spacing: 0;
+`
+
+export const TitleFadingLetter = styled.h1`
+  font-size: 16rem;
+  font-weight: 900;
+  color: ${Colors.red};
+  letter-spacing: 0;
+  animation: ${fadeInMoveLeft} .2s linear forwards;
 `
 
 export const TitleHiddenLetter = styled.h1`
@@ -129,17 +192,18 @@ export const ToolsDescription = styled.h1`
 export const Button = styled.button`
   border-radius: 5px;
   border: none;
-  background: ${Colors.green};
-  color: white;
+  background: ${Colors.yellow};
+  color: ${Colors.black2};
   padding: 1rem;
   margin-top: 2rem;
   width: 20rem;
   font-size: 2rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all .2s;
   
   &:hover {
-    background: ${darken(0.07, `${Colors.green}`)};
+    background: ${darken(0.07, `${Colors.yellow}`)};
   }
   &:active {
     color: ${Colors.black};

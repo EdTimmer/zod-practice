@@ -8,4 +8,6 @@ export const Colors = {
   gray: '#BDBDBD',
   beige: '#EEE9Da',
   blue: '#29B6F6',
+  // yellow: '#FFD54F',
+  yellow: '#FFCB27',
 };

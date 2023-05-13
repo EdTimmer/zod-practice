@@ -7,6 +7,7 @@ import {
   ZodImage,
   TitleContainer,
   TitleFlickerLetter,
+  TitleShakingLetter,
   TitleLetter,
   TitleSecondary,
   PresentationTitle,
@@ -14,12 +15,14 @@ import {
   CenterContainer,
   Button,
   TitleHiddenLetter,
+  TitleFadingLetter,
   AnimatedDiv,
 } from './Home.css'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../assets/vite.svg'
 import zodLogo from '../assets/zod_logo.svg'
 import { useState } from 'react'
+
 
 /* SIMULATING TYPE CHECKING AT RUNTIME */
 
@@ -108,11 +111,34 @@ const calculateArea_WithZod = (shape: Square | Rectangle) => {
 
 // calculateArea_WithZod(myRectangle)
 
+
+const ComponentA = () => <TitleFlickerLetter>T</TitleFlickerLetter>
+const ComponentB = () => <TitleShakingLetter>T</TitleShakingLetter>
+const ComponentC = () => <TitleFadingLetter>T</TitleFadingLetter>
+const ComponentD = () => <TitleHiddenLetter>T</TitleHiddenLetter>
+
+const ComponentE = () => <TitleLetter>T</TitleLetter>
+
+const renderComponentByCount = (count: number) => {
+  switch (count) {
+    case 1:
+      return <ComponentA />
+    case 2:
+      return <ComponentB />
+    case 3:
+      return <ComponentC />
+    case 4:
+      return <ComponentD />
+    default:
+      return <ComponentE />
+  }
+}
+
 const Home = () => {
   const [count, setCount] = useState(0)
 
   const handleButtonClick = () => {
-    if (count < 2) {
+    if (count < 4) {
       setCount(count + 1)
     } else {
       setCount(0)
@@ -123,12 +149,13 @@ const Home = () => {
     <HomeContainer>
       <CenterContainer>
         <TitleContainer>
-          {count === 0 ? (
+          {renderComponentByCount(count)}
+          {/* {count === 0 ? (
             <TitleLetter>T</TitleLetter>
           ) : count === 1 ? (
-            <TitleFlickerLetter>T</TitleFlickerLetter>
-          ) : <TitleHiddenLetter>T</TitleHiddenLetter>}
-          <AnimatedDiv shouldAnimate={count === 2}>
+            <TitleShakingLetter>T</TitleShakingLetter>
+          ) : <TitleHiddenLetter>T</TitleHiddenLetter>} */}
+          <AnimatedDiv shouldAnimate={count === 4}>
             <TitleLetter>E</TitleLetter>
             <TitleLetter>D</TitleLetter>
             <TitleSecondary>Talks</TitleSecondary>
