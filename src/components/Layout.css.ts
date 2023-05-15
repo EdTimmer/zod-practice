@@ -48,7 +48,13 @@ export const NavContainer = styled.div`
   margin-right: 5rem;
 `
 
-export const LinkContainer = styled.div<{ $isCurrent: boolean }>`
+export const NavLink = styled(Link) <{ $isCurrent: boolean }>`
+  color: ${Colors.white};
+  font-size: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: ${({ $isCurrent }) => $isCurrent ? 'default' : 'pointer'};
+  
   border: none;
   padding: 0.5rem 1rem;
   border-top: 1px solid ${Colors.orange};
@@ -68,12 +74,4 @@ export const LinkContainer = styled.div<{ $isCurrent: boolean }>`
       transform: ${({ $isCurrent }) => $isCurrent ? 'none' : `translateY(.2rem)`};
       background: ${({ $isCurrent }) => $isCurrent ? 'none' : `${lighten(0.07, `${Colors.orange}`)}`}; ;
   };
-`
-
-export const NavLink = styled(Link) <{ $isCurrent: boolean }>`
-  color: ${Colors.white};
-  font-size: 2rem;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: ${({ $isCurrent }) => $isCurrent ? 'default' : 'pointer'};
 `

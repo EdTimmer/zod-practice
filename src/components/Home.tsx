@@ -23,7 +23,6 @@ import viteLogo from '../assets/vite.svg'
 import zodLogo from '../assets/zod_logo.svg'
 import { useState } from 'react'
 
-
 /* SIMULATING TYPE CHECKING AT RUNTIME */
 
 interface Square {
@@ -111,39 +110,40 @@ const calculateArea_WithZod = (shape: Square | Rectangle) => {
 
 // calculateArea_WithZod(myRectangle)
 
-
-const ComponentA = () => <TitleFlickerLetter>T</TitleFlickerLetter>
-const ComponentB = () => <TitleShakingLetter>T</TitleShakingLetter>
-const ComponentC = () => <TitleFadingLetter>T</TitleFadingLetter>
-const ComponentD = () => <TitleHiddenLetter>T</TitleHiddenLetter>
-
-const ComponentE = () => <TitleLetter>T</TitleLetter>
-
-const renderComponentByCount = (count: number) => {
-  switch (count) {
-    case 1:
-      return <ComponentA />
-    case 2:
-      return <ComponentB />
-    case 3:
-      return <ComponentC />
-    case 4:
-      return <ComponentD />
-    default:
-      return <ComponentE />
-  }
-}
-
 const Home = () => {
   const [count, setCount] = useState(0)
 
-  const handleButtonClick = () => {
-    if (count < 4) {
-      setCount(count + 1)
-    } else {
-      setCount(0)
+  const ComponentA = () => <TitleLetter>T</TitleLetter>
+  const ComponentB = () => <TitleFlickerLetter>T</TitleFlickerLetter>
+  const ComponentC = () => <TitleShakingLetter>T</TitleShakingLetter>
+  const ComponentD = () => <TitleFadingLetter>T</TitleFadingLetter>
+  const ComponentE = () => (
+    <TitleHiddenLetter isVisible={count === 4}>T</TitleHiddenLetter>
+  )
+
+  const renderComponentByCount = (count: number) => {
+    switch (count) {
+      case 0:
+        return <ComponentA />
+      case 1:
+        return <ComponentB />
+      case 2:
+        return <ComponentC />
+      case 3:
+        return <ComponentD />
+      default:
+        return null
     }
   }
+
+  const handleButtonClick = () => {
+    if (count < 3) {
+      setCount(count + 1)
+    } else {
+      return
+    }
+  }
+  
 
   return (
     <HomeContainer>
@@ -155,7 +155,7 @@ const Home = () => {
           ) : count === 1 ? (
             <TitleShakingLetter>T</TitleShakingLetter>
           ) : <TitleHiddenLetter>T</TitleHiddenLetter>} */}
-          <AnimatedDiv shouldAnimate={count === 4}>
+          <AnimatedDiv shouldAnimate={count === 3}>
             <TitleLetter>E</TitleLetter>
             <TitleLetter>D</TitleLetter>
             <TitleSecondary>Talks</TitleSecondary>

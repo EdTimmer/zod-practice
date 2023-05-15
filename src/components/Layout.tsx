@@ -7,7 +7,6 @@ import {
   Logo,
   NavContainer,
   NavLink,
-  LinkContainer,
 } from './Layout.css'
 
 
@@ -19,21 +18,15 @@ const Layout = () => {
       <Header>
         <Logo>Zod Practice</Logo>
         <NavContainer>
-          <LinkContainer $isCurrent={pathname === '/'}>
             <NavLink $isCurrent={pathname === '/'} to="/">
               Home
             </NavLink>
-          </LinkContainer>
-          <LinkContainer $isCurrent={pathname === '/form'}>
             <NavLink $isCurrent={pathname === '/form'} to="/form">
               Form
             </NavLink>
-          </LinkContainer>
-          <LinkContainer $isCurrent={pathname === '/api'}>
             <NavLink $isCurrent={pathname === '/api'} to="/api">
               API Call
             </NavLink>
-          </LinkContainer>
         </NavContainer>
       </Header>
       <OutletContainer>

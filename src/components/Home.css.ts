@@ -3,18 +3,18 @@ import { Colors } from "../styles/colors"
 import { darken } from "polished";
 
 const flicker = keyframes`
-  0% {opacity:0;}
-  9% {opacity:0;}
-  10% {opacity:.5;}
-  13% {opacity:0;}
-  20% {opacity:.5;}
-  25% {opacity:0;}
-  30% {opacity:0;}
-  35% {opacity:0;}
-  49% {opacity:0;}
-  50% {opacity:.5;}
-  53% {opacity:0;}
-  75% {opacity:0;}
+  0% {opacity: 0;}
+  9% {opacity: 0;}
+  10% {opacity: .5;}
+  13% {opacity: 0;}
+  20% {opacity: .5;}
+  25% {opacity: 0;}
+  30% {opacity: 0;}
+  35% {opacity: 0;}
+  49% {opacity: 0;}
+  50% {opacity: .5;}
+  53% {opacity: 0;}
+  75% {opacity: 0;}
 `;
 
 const moveLeftAnimation = keyframes`
@@ -49,10 +49,6 @@ const shakeAnimation = keyframes`
   30% {
     transform: rotate(5deg);
   }
-  
-  /* 25% {
-    transform: rotate(-5deg);
-  } */
   50% {
     transform: rotate(0deg);
   }
@@ -161,10 +157,10 @@ export const TitleFadingLetter = styled.h1`
   animation: ${fadeInMoveLeft} .2s linear forwards;
 `
 
-export const TitleHiddenLetter = styled.h1`
+export const TitleHiddenLetter = styled.h1<{ isVisible: boolean }>`
   font-size: 16rem;
   font-weight: 900;
-  color: ${Colors.black2};
+  color: ${Colors.yellow};
   letter-spacing: 0;
 `
 
