@@ -8,11 +8,18 @@ const AddressSchema = z.object({
 
 const PetsSchema = z.array(z.string())
 
+const BurgerOfTheDayEnum = z.enum([
+  'GourdonHamsey',
+  'TheSilentilNight',
+  'PoutineOnTheRitz',
+])
+
 const PersonSchema = z.object({
   name: z.string(),
   age: z.number(),
   address: AddressSchema,
   pets: PetsSchema,
+  burgerOfTheDay: BurgerOfTheDayEnum,
 })
 
 type PersonType = z.infer<typeof PersonSchema>
@@ -34,10 +41,11 @@ const LindasRaccoons = [
 
 const Linda = {
   name: 'Linda Belcher',
-  age: '44',
+  age: 44,
   email: 'l.burger@gmail.com',
   address: LindasAddress,
   pets: LindasRaccoons,
+  burgerOfTheDay: 'GourdonHamsey',
 }
 
 const GaylesCats: PetNames = ["Jean Paw'd Van Damme", 'Pinkeye', 'Mr. Business']
