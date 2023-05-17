@@ -2,11 +2,15 @@ import { z } from 'zod'
 
 const AddressSchema = z.object({
   street: z.string(),
-  town: z.string().min(2),
+  town: z.string().min(2).max(20),
   zip: z.string().length(5, { message: 'Zip Code must have 5 characters' }),
 })
 
-const PetsSchema = z.array(z.string())
+type AddressType = z.infer<typeof AddressSchema>
+
+const PetsSchema = z.array(z.string()).default([])
+
+type PetNamesType = z.infer<typeof PetsSchema>
 
 const BurgerOfTheDayEnum = z.enum([
   'GourdonHamsey',
@@ -14,8 +18,10 @@ const BurgerOfTheDayEnum = z.enum([
   'PoutineOnTheRitz',
 ])
 
+type BurgerType = z.infer<typeof BurgerOfTheDayEnum>
+
 const PersonSchema = z.object({
-  name: z.string(),
+  name: z.string().optional(),
   birthday: z.date().optional(),
   email: z.string().email(),
   numberOfChildren: z.union([z.string(), z.number()]),
@@ -23,11 +29,9 @@ const PersonSchema = z.object({
   pets: PetsSchema,
   burgerOfTheDay: BurgerOfTheDayEnum,
 })
+.passthrough()
 
 type PersonType = z.infer<typeof PersonSchema>
-type AddressType = z.infer<typeof AddressSchema>
-type PetNamesType = z.infer<typeof PetsSchema>
-type BurgerType = z.infer<typeof BurgerOfTheDayEnum>
 
 const LindasAddress: AddressType = {
   street: '123 Ocean Avenue',
@@ -43,28 +47,84 @@ const LindasRaccoons: PetNamesType = [
 ]
 
 const Linda: PersonType = {
-  name: 'Linda Belcher',
+  // name: 'Linda Belcher',
   birthday: new Date("06/03/1968"),
-  numberOfChildren: '3',
+  numberOfChildren: 3,
   email: 'l.burger@gmail.com',
   address: LindasAddress,
   pets: LindasRaccoons,
   burgerOfTheDay: 'GourdonHamsey',
+  businessName: 'Bob\'s Burgers',
 }
 
-const GaylesCats: PetNamesType = ["Jean Paw'd Van Damme", 'Pinkeye', 'Mr. Business']
+// const parsedPerson = PersonSchema.parse(Linda)
+// console.log('parsedPerson', parsedPerson)
 
-
-const parsedPerson = PersonSchema.parse(Linda)
-console.log('parsedPerson', parsedPerson)
-
-// const safeParsedPerson = PersonSchema.safeParse(Linda)
-// console.log('safeParsedPerson', safeParsedPerson)
+const safeParsedPerson = PersonSchema.safeParse(Linda)
+console.log('safeParsedPerson', safeParsedPerson)
 
 // if (!safeParsedPerson.success) {
 //   const formatted = safeParsedPerson.error.format()
 //   console.log('formatted', formatted)
 // }
+
+const GaylesCats: PetNamesType = ["Jean Paw'd Van Damme", 'Pinkeye', 'Mr. Business']
+
+// Array of Custom Types
+
+const PeopleSchema = z.object({
+  names: z.array(PersonSchema),
+})
+
+type PeopleType = z.infer<typeof PeopleSchema>
+
+// Extending Schemas
+
+const EpisodeWithId = z.object({
+  id: z.string().uuid(),
+})
+
+const Episode = EpisodeWithId.extend({
+  name: z.string(),
+})
+
+type EpisodeType = z.infer<typeof Episode>
+
+const NextEpisode = EpisodeWithId.merge(
+  z.object({
+    name: z.string(),
+  }),
+)
+
+type NextEpisodeType = z.infer<typeof NextEpisode>
+
+// Transform Data Within Schema
+
+const AwesomeBelcher = z.object({
+	name: z.string().transform((name) => `Awesome ${name}`)
+})
+
+type AwesomeBelcherType = z.infer<typeof AwesomeBelcher>
+
+const Luise = {
+  name: 'Luise Belcher'
+}
+
+const parsedLuise = AwesomeBelcher.parse(Luise)
+// console.log('parsedLuise', parsedLuise)
+
+const BelcherName = z.object({
+  name: z.string() 
+}).transform((person) => ({
+		...person,
+		nameAsArray: person.name.split(" "),
+}))
+
+type BelcherNameType = z.infer<typeof BelcherName>
+
+const parsedBelcher = BelcherName.parse(Luise)
+// console.log('parsedBelcher', parsedBelcher)
+
 
 
 /* SIMULATING TYPE CHECKING AT RUNTIME */
@@ -93,7 +153,7 @@ const calculateArea_PropertyCheck = (shape: Square | Rectangle) => {
   }
 }
 
-// calculateArea_PropertyCheck(myRectangle)
+// calculateArea_PropertyCheck(mySquare)
 
 /* BY TAGGED / DISCRIMINATED UNION */
 
@@ -128,7 +188,7 @@ const calculateArea_TypeGuard = (shape: Square | Rectangle) => {
 const SquareSchema = z.object({
   width: z.number(),
   height: z.undefined(),
-  score: z.string(),
+  // score: z.string(),
   // height: z.never(),
 })
 

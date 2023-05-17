@@ -56,7 +56,8 @@ const Request = () => {
     ).then((res) => res.json())
 
     console.log('raw data', data)
-
+    // const parsedNotSafe = CatSchema.parse(data);
+    // console.log('parsedNotSafe', parsedNotSafe)
     const parsed = CatSchema.safeParse(data)
     console.log('parsed data', parsed)
     // Handle Success
