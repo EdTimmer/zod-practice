@@ -3,7 +3,7 @@ import { z } from 'zod'
 const AddressSchema = z.object({
   street: z.string(),
   town: z.string().min(2),
-  zip: z.string().length(5),
+  zip: z.string().length(5, { message: 'Zip Code must have 5 characters' }),
 })
 
 const PetsSchema = z.array(z.string())
@@ -16,7 +16,9 @@ const BurgerOfTheDayEnum = z.enum([
 
 const PersonSchema = z.object({
   name: z.string(),
-  age: z.number(),
+  birthday: z.date().optional(),
+  email: z.string().email(),
+  numberOfChildren: z.union([z.string(), z.number()]),
   address: AddressSchema,
   pets: PetsSchema,
   burgerOfTheDay: BurgerOfTheDayEnum,
@@ -24,46 +26,45 @@ const PersonSchema = z.object({
 
 type PersonType = z.infer<typeof PersonSchema>
 type AddressType = z.infer<typeof AddressSchema>
-type PetNames = z.infer<typeof PetsSchema>
+type PetNamesType = z.infer<typeof PetsSchema>
+type BurgerType = z.infer<typeof BurgerOfTheDayEnum>
 
-const LindasAddress = {
+const LindasAddress: AddressType = {
   street: '123 Ocean Avenue',
   town: "Seymour's Bay",
   zip: '12345',
 }
 
-const LindasRaccoons = [
+const LindasRaccoons: PetNamesType = [
   'Little King Trashmouth',
   'El Diablo',
   'Big Baby Pudding Snatcher',
   'Gary',
 ]
 
-const Linda = {
+const Linda: PersonType = {
   name: 'Linda Belcher',
-  age: 44,
+  birthday: new Date("06/03/1968"),
+  numberOfChildren: '3',
   email: 'l.burger@gmail.com',
   address: LindasAddress,
   pets: LindasRaccoons,
   burgerOfTheDay: 'GourdonHamsey',
 }
 
-const GaylesCats: PetNames = ["Jean Paw'd Van Damme", 'Pinkeye', 'Mr. Business']
+const GaylesCats: PetNamesType = ["Jean Paw'd Van Damme", 'Pinkeye', 'Mr. Business']
 
-// const parsedPerson = PersonSchema.parse(Linda)
-// console.log('parsedPerson', parsedPerson)
 
-const safeParsedPerson = PersonSchema.safeParse(Linda)
-console.log('safeParsedPerson', safeParsedPerson)
+const parsedPerson = PersonSchema.parse(Linda)
+console.log('parsedPerson', parsedPerson)
+
+// const safeParsedPerson = PersonSchema.safeParse(Linda)
+// console.log('safeParsedPerson', safeParsedPerson)
 
 // if (!safeParsedPerson.success) {
 //   const formatted = safeParsedPerson.error.format()
 //   console.log('formatted', formatted)
 // }
-
-
-
-
 
 
 /* SIMULATING TYPE CHECKING AT RUNTIME */
